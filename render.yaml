@@ -1,0 +1,41 @@
+databases:
+  - name: ttt-postgres
+    plan: free
+    postgresMajorVersion: 15
+
+services:
+  # Nakama (authoritative backend)
+  - type: web
+    name: ttt-nakama
+    runtime: docker
+    plan: free
+    dockerfilePath: backend/Dockerfile.render-nakama
+    dockerContext: .
+    healthCheckPath: /healthcheck
+    envVars:
+      - key: PORT
+        value: "10000"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ttt-postgres
+          property: connectionString
+
+  # React frontend (static site)
+  - type: web
+    name: ttt-frontend
+    runtime: static
+    buildCommand: cd frontend && npm ci && npm run build
+    staticPublishPath: frontend/dist
+    envVars:
+      # Pull the backend’s actual onrender.com hostname, which can include a random suffix.
+      - key: VITE_NAKAMA_HOST
+        fromService:
+          type: web
+          name: ttt-nakama
+          envVarKey: RENDER_EXTERNAL_HOSTNAME
+      - key: VITE_NAKAMA_PORT
+        value: "443"
+      - key: VITE_NAKAMA_SSL
+        value: "true"
+      - key: VITE_NAKAMA_SERVER_KEY
+        value: defaultkey

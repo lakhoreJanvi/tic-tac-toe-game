@@ -1,0 +1,11 @@
+FROM heroiclabs/nakama:3.38.0
+
+# Copy Nakama config + runtime modules into the image (Render can't use docker-compose volume mounts).
+COPY nakama/config.yml /nakama/data/config.yml
+COPY backend/nakama /nakama/data/modules
+COPY backend/render/nakama-entrypoint.sh /nakama/nakama-entrypoint.sh
+
+RUN chmod +x /nakama/nakama-entrypoint.sh
+
+ENTRYPOINT ["/nakama/nakama-entrypoint.sh"]
+

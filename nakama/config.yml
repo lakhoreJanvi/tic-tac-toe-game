@@ -1,0 +1,13 @@
+logger:
+  level: "DEBUG"
+
+socket:
+  # Allow browser-based dev clients (Vite on :5173) to call Nakama HTTP API on :7350.
+  # For production, lock this down to your deployed frontend origin.
+  server_key: "defaultkey"
+  response_headers:
+    - "Access-Control-Allow-Origin=*"
+    - "Access-Control-Allow-Headers=Authorization, Content-Type"
+    - "Access-Control-Allow-Methods=GET, POST, PUT, DELETE, OPTIONS"
+
+# NOTE: This file is intentionally small; most settings are passed via docker-compose flags.

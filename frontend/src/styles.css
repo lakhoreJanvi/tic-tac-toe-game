@@ -1,0 +1,232 @@
+:root {
+  color-scheme: light dark;
+  --bg: #0b1020;
+  --card: #121a33;
+  --text: #e8ecff;
+  --muted: #aab3d6;
+  --accent: #7c5cff;
+  --good: #39d98a;
+  --bad: #ff5c7a;
+  background: radial-gradient(1200px 800px at 20% 10%, #1a2460 0%, var(--bg) 60%);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 20px 16px 48px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 0.2px;
+}
+
+.card {
+  background: color-mix(in srgb, var(--card) 88%, black);
+  border: 1px solid color-mix(in srgb, var(--card) 55%, white);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 860px) {
+  .row {
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: start;
+  }
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.btns {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.kpi {
+  border: 1px solid color-mix(in srgb, var(--card) 55%, white);
+  background: color-mix(in srgb, var(--card) 92%, black);
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+
+.kpiLabel {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.kpiValue {
+  margin-top: 6px;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+button {
+  appearance: none;
+  border: 1px solid color-mix(in srgb, var(--card) 55%, white);
+  background: color-mix(in srgb, var(--card) 92%, black);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button.primary {
+  border-color: color-mix(in srgb, var(--accent) 75%, white);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 70%, black), color-mix(in srgb, var(--accent) 40%, black));
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--card) 55%, white);
+  background: color-mix(in srgb, var(--card) 92%, black);
+  color: var(--text);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  width: min(320px, 100%);
+}
+
+.cell {
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  font-size: 34px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  user-select: none;
+  background: color-mix(in srgb, var(--card) 95%, black);
+}
+
+.cell.win {
+  background: color-mix(in srgb, var(--good) 22%, var(--card));
+  outline: 2px solid color-mix(in srgb, var(--good) 60%, transparent);
+}
+
+.cell.clickable {
+  outline: 2px solid transparent;
+}
+
+.cell.clickable:hover {
+  outline-color: color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+.toast {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--card) 55%, white);
+  background: color-mix(in srgb, var(--card) 88%, black);
+}
+
+.toast.bad {
+  border-color: color-mix(in srgb, var(--bad) 60%, white);
+}
+
+.toast.good {
+  border-color: color-mix(in srgb, var(--good) 60%, white);
+}
+
+.table {
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--card) 55%, white);
+  overflow: hidden;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 72px 1fr 90px;
+  gap: 10px;
+  padding: 10px 12px;
+  background: color-mix(in srgb, var(--card) 92%, black);
+  border-bottom: 1px solid color-mix(in srgb, var(--card) 55%, white);
+}
+
+.tableRow:last-child {
+  border-bottom: 0;
+}
+
+.tableCell {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 50;
+}
+
+.modal {
+  width: min(520px, 100%);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--card) 90%, black);
+  border: 1px solid color-mix(in srgb, var(--card) 55%, white);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  padding: 14px;
+}
+
+.modalTitle {
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.modalText {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
